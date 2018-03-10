@@ -1,0 +1,53 @@
+import turtle
+wn = turtle.Screen
+
+numSides=input("How many sides?")
+numSides=int(numSides)
+
+lenSides=input("How long are the sides?")
+lenSides=int(lenSides)
+
+numShapes=input("How many shapes?")
+numShapes=int(numShapes)
+
+offsetAng=input("Offset angle?")
+offsetAng=int(offsetAng)
+
+numColors=input("Number of colors?")
+numColors=int(numColors)
+
+#colorCycle=["red","orange","yellow","green","blue","violet"]
+colorCycle=["deeppink","hotpink","violet","blue","purple"]
+
+i=numSides
+x=numShapes
+y=numColors
+z=0 #color counter
+
+shapeAng=360/numSides
+rotationAng=360/numShapes
+
+turtle.tracer(0, 0)
+
+al=turtle.Turtle()
+al.pensize(1)
+al.color(colorCycle[0])
+#al.speed(0)
+
+while (y):
+  x=numShapes
+  while (x):
+    i=numSides
+    while (i):  
+      al.forward(lenSides)
+      al.left(shapeAng)
+      i=i-1
+    al.left(rotationAng)
+    x=x-1
+  
+  al.left(offsetAng)
+  y=y-1
+  z=(z+1)%5
+  al.color(colorCycle[z])
+  
+turtle.update()
