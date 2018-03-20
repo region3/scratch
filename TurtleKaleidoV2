@@ -1,0 +1,43 @@
+import turtle
+wn = turtle.Screen()
+al = turtle.Turtle()
+turtle.tracer(0,0)
+
+'''
+num_points = input("How many points?")
+ang_points = input("What angle on points?")
+leng_points = input("How long are the points?")
+ang_offset = input ("What's the offset?")
+
+x,y,z,w = num_points, ang_points, leng_points, ang_offset
+x,y,z,w = int(x),int(y),int(z), int(w)
+'''
+x = 7
+y = 15
+z = 80
+w = 40
+
+def draw_ngon (x,y,z):
+    comp_ang_points = 360-((180 - y)/2)
+    circ_num_points = (360)/x
+    i = x
+
+    for i in range(x):
+        al.forward(z)
+        al.right(y)
+        al.backward(z)
+        al.left(circ_num_points+y)
+        i-=1
+    
+a=int(360/w)
+i=a
+
+for b in range(120):
+    for i in range (a):
+        draw_ngon(x,y,z)
+        al.left(w)
+        i-=1
+    z+=10
+    
+turtle.update()
+wn.exitonclick()
