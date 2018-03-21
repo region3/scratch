@@ -1,0 +1,55 @@
+import turtle
+import math
+wn = turtle.Screen()
+al = turtle.Turtle()
+al.color("black")
+turtle.tracer(0,0)
+#al.speed(7)
+
+'''
+    num_sides = input("How many sides?")
+    num_length = input("How long should the sides be?")
+    num_shapes = input("How many shapes to repeat?")
+    num_offset = input("What should the offset be?")
+
+    int (num_sides,num_length,num_shapes,num_offset)
+'''
+num_sides = 12
+num_length = 0
+num_shapes = 100
+num_offset =4
+    
+def radius(num_sides,num_length):
+    return(num_length/(2*math.sin(math.radians(180/num_sides))))
+
+def drawPolygon (num_sides,num_length):
+    ang = (num_sides-2)*180/num_sides
+    for i in range(num_sides):
+        al.forward(num_length)
+        al.left(180-ang)
+    
+
+def drawShape (num_sides,num_length,num_shapes,num_offset):
+    ang = (num_sides-2)*180/num_sides
+    al.up()
+    poly_rad=radius(num_sides,num_length)
+    al.forward(poly_rad)
+    al.left(180-ang/2)
+    al.down()
+    for i in range(num_shapes):
+        drawPolygon(num_sides,num_length)
+        al.up()
+        al.left(ang/2-180)
+        al.back(poly_rad)
+        num_length += num_offset
+        poly_rad=radius(num_sides,num_length)
+        al.forward(poly_rad)
+        al.down()
+        al.left(180-ang/2)
+    
+    
+
+drawShape(num_sides,num_length,num_shapes,num_offset)
+
+
+turtle.update()
