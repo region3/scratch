@@ -14,10 +14,14 @@ turtle.tracer(0,0)
 
     int (num_sides,num_length,num_shapes,num_offset)
 '''
-num_sides = 12
+num_sides = 8
 num_length = 0
-num_shapes = 100
-num_offset =4
+num_shapes = 150
+num_offset =6
+
+#al.color("green")
+#al.stamp()
+#al.color("black")
     
 def radius(num_sides,num_length):
     return(num_length/(2*math.sin(math.radians(180/num_sides))))
@@ -26,26 +30,35 @@ def drawPolygon (num_sides,num_length):
     ang = (num_sides-2)*180/num_sides
     for i in range(num_sides):
         al.forward(num_length)
-        al.left(180-ang)
+        al.left(180-ang)   
     
 
 def drawShape (num_sides,num_length,num_shapes,num_offset):
     ang = (num_sides-2)*180/num_sides
     al.up()
-    poly_rad=radius(num_sides,num_length)
+    big_side_len=num_length+num_shapes*num_offset
+    poly_rad=radius(num_sides,big_side_len)
     al.forward(poly_rad)
     al.left(180-ang/2)
     al.down()
+    counter=1
     for i in range(num_shapes):
-        drawPolygon(num_sides,num_length)
+        if counter%2:
+            al.fillcolor("black")
+        else:
+            al.fillcolor("white")
+        al.begin_fill()
+        drawPolygon(num_sides,big_side_len)
+        al.end_fill()
         al.up()
         al.left(ang/2-180)
         al.back(poly_rad)
-        num_length += num_offset
-        poly_rad=radius(num_sides,num_length)
+        big_side_len -= num_offset
+        poly_rad=radius(num_sides,big_side_len)
         al.forward(poly_rad)
         al.down()
         al.left(180-ang/2)
+        counter +=1
     
     
 
