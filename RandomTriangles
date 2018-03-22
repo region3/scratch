@@ -1,0 +1,45 @@
+import turtle
+import math
+import random
+
+wn = turtle.Screen()
+al = turtle.Turtle()
+al.hideturtle()
+al.up()
+turtle.tracer(0,0)
+al.speed(7)
+
+def rand_color():
+    color_list=["white smoke","gainsboro","light gray","silver","dark gray","gray","dim gray","black"]
+    return(color_list[random.randrange(0,7)])
+    
+def make_equil_triangle():
+    side_len=random.randrange(0,401)
+    for i in range(3):
+        al.forward(side_len)
+        al.left(120)
+
+def make_isoc_triangle():
+    base_len=random.randrange(50,200)
+    base_ang=random.randrange(0,88)
+    other_side_len=base_len*(1/(2*math.cos(math.radians(base_ang))))
+    top_ang=180-(2*base_ang)
+    al.forward(base_len)
+    al.left(180-base_ang)
+    al.forward(other_side_len)
+    al.left(180-top_ang)
+    al.forward(other_side_len)
+    al.left(180-base_ang)
+        
+
+for i in range(200):
+    al.goto(random.randrange(-400,400),random.randrange(-400,400))
+    tilt_ang=random.randrange(-45,46)
+    al.left(tilt_ang)
+    al.down()
+    al.color(rand_color())
+    al.pensize(random.randrange(1,8))
+    make_isoc_triangle()
+    al.right(tilt_ang)
+    al.up()
+
