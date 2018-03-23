@@ -1,0 +1,41 @@
+import turtle
+import math
+import random
+
+wn = turtle.Screen()
+al = turtle.Turtle()
+al.hideturtle()
+al.up()
+turtle.tracer(0,0)
+#al.speed(0)
+
+def rand_color():
+    color_list=["white smoke","gainsboro","light gray","silver","dark gray","gray","dim gray","black"]
+    return(color_list[random.randrange(0,8)])
+
+def write_iter():
+    al.down()
+    al.color("red")
+    al.write(i)
+    al.up()
+
+def triangle():
+    al.up()
+    home = [random.randrange(-400,401),random.randrange(-400,401)]
+    al.goto(home[0],home[1])
+    al.down()
+    al.goto(random.randrange(-400,401),random.randrange(-400,401))
+    al.goto(random.randrange(-400,401),random.randrange(-400,401))
+    al.goto(home[0],home[1])
+    al.up()
+
+for i in range(100):
+    al.clear()
+    for i in range(800):
+        al.pensize(random.randrange(1,8))
+        al.color(rand_color())
+        triangle()
+        #write_iter()
+    turtle.update() 
+        
+    
