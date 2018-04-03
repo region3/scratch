@@ -1,0 +1,49 @@
+import turtle
+import math
+import random
+
+wn = turtle.Screen()
+al = turtle.Turtle()
+#turtle.tracer(0,0)
+al.speed(0)
+d={}
+
+def radius(num_points,num_length):
+    return(num_length/(2*math.sin(math.radians(180/num_points))))
+
+          
+def find_rand_points(num_points):
+    for i in range(num_points):
+        d[i]=(random.randrange(-300,301),random.randrange(-300,301))
+    connect_points(num_points)
+
+def connect_points(num_points):
+    al.down()
+    for i in range(num_points):
+        al.goto(d[i])
+        al.down()
+        x=0
+        while x!=i:
+            al.goto(d[x])
+            al.goto(d[i])
+            x+=1
+
+def draw_polygon (num_points,num_length):
+    away_center(num_points,num_length)
+    ang = (num_points-2)*180/num_points
+    for i in range(num_points):
+        al.forward(num_length)
+        al.left(180-ang)
+        d[i]=al.position()
+    connect_points(num_points)
+    turtle.update()
+
+def away_center(num_points,num_length):
+    ang = (num_points-2)*180/num_points
+    radi=radius(num_points,num_length)
+    al.up()
+    al.forward(radi)  
+    al.left(180-ang/2)
+    
+draw_polygon(20,40)
+find_rand_points(40)
