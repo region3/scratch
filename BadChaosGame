@@ -1,0 +1,89 @@
+import math
+import turtle
+import random
+
+wn=turtle.Screen()
+al=turtle.Turtle()
+al.shape("circle")
+al.down()
+turtle.tracer(0,0)
+
+ver1=()
+ver2=()
+ver3=()
+ver4=()
+to_center = 0
+current_pos = al.position()
+shape_center=()
+
+def current_pos():
+    global current_pos
+    current_pos = al.position()
+
+def draw_triangle(size=300):
+    al.forward(size)
+    al.left(120)
+    global ver1   
+    ver1=al.position()
+    al.forward(size)
+    al.left(120)
+    global ver2   
+    ver2=al.position()
+    al.forward(size)
+    al.left(120)
+    global ver3
+    ver3=al.position()
+    global to_center
+    to_center = math.sqrt((.5*size)**2+size**2)
+
+def draw_square(size=300):
+    al.forward(size)
+    al.left(90)
+    global ver1   
+    ver1=al.position()
+    al.forward(size)
+    al.left(90)
+    global ver2   
+    ver2=al.position()
+    al.forward(size)
+    al.left(90)
+    global ver3
+    ver3=al.position()
+    al.forward(size)
+    al.left(90)
+    global ver4
+    ver4=al.position()
+    global to_center
+    to_center = math.sqrt(2*(size**2))
+    
+draw_square()
+
+al.left(45)
+al.up()
+al.forward(to_center/2)
+shape_center=al.position()
+
+def pos_ave(pt1,pt2):
+    xvar=(pt1[0]+pt2[0])/2
+    yvar=(pt1[1]+pt2[1])/2
+    return(xvar,yvar)
+
+def chaos_game(iter,dot_size):
+    for i in range(iter):
+        dice=random.randrange(1, 5)
+        if dice==1:
+            al.goto(pos_ave(al.position(),ver1))
+            al.dot(dot_size)
+        elif dice==2:
+            al.goto(pos_ave(al.position(),ver2))
+            al.dot(dot_size)
+        elif dice==3:
+            al.goto(pos_ave(al.position(),ver3))
+            al.dot(dot_size)
+        else:
+            al.goto(pos_ave(al.position(),ver4))
+            al.dot(dot_size)
+
+chaos_game(50000,2)
+
+turtle.update()
