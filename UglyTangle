@@ -1,0 +1,64 @@
+import turtle
+import math
+import random
+
+wn = turtle.Screen()
+world_x=500 #set the largest and smallest x value for the world coordinates
+world_y=500 #set the largest and smallest y value for the world coordinates
+wn.setworldcoordinates(-1*world_x,-1*world_y,world_x,world_y)
+al = turtle.Turtle()
+al.up()
+turtle.tracer(0,0)
+#al.speed(0)
+
+
+def draw_polygon (num_points,num_length):
+    al.down()
+    ang = (num_points-2)*180/num_points
+    for i in range(num_points):
+        al.forward(num_length)
+        al.left(180-ang)
+    al.up()
+
+def radius(num_points,num_length):
+    return(num_length/(2*math.sin(math.radians(180/num_points))))
+
+def tumble(num_points=3,num_length=10,iter_turn=10,border=15,spacing=3):
+    repeat_on_x(num_points,num_length,spacing,iter_turn)
+
+def tumble_back(num_points=3,num_length=10,iter_turn=10,border=15,spacing=3):
+    repeat_on_x_back(num_points,num_length,spacing,iter_turn)
+
+def repeat_on_x (num_points,num_length,spacing,iter_turn):
+    while al.xcor()<=(485-radi):
+        draw_polygon (num_points,num_length)
+        temp_xcor=al.xcor()
+        al.goto(temp_xcor+(spacing*radi),al.ycor())
+        al.right(iter_turn)
+        #turtle.update()
+
+def repeat_on_x_back (num_points,num_length,spacing,iter_turn):
+    while al.xcor()>=(-485+radi):
+        draw_polygon (num_points,num_length)
+        temp_xcor=al.xcor()
+        al.goto(temp_xcor-(spacing*radi),al.ycor())
+        al.right(iter_turn)
+        turtle.update()
+
+def starting_position(border,num_points,num_length):
+    temp_x = (-1*(world_x-border))
+    temp_y = world_y-border-(radi)
+    al.goto(temp_x,temp_y)
+
+num_points=6
+num_length=45
+iter_turn=10
+border=5
+spacing=.5
+radi=radius(num_points,num_length)
+
+starting_position(border,num_points,num_length)
+xstar=al.xcor()
+for i in range(45):
+    tumble(num_points,num_length,iter_turn,border,spacing)
+    al.goto(xstar,al.ycor()-(spacing*radi))
