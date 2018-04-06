@@ -1,0 +1,68 @@
+import turtle
+import math
+import random
+
+wn = turtle.Screen()
+'''
+world_x=500 #set the largest and smallest x value for the world coordinates
+world_y=500 #set the largest and smallest y value for the world coordinates
+wn.setworldcoordinates(-1*world_x,-1*world_y,world_x,world_y)
+'''
+al = turtle.Turtle()
+al.up()
+turtle.tracer(0,0)
+#al.speed(0)
+
+def draw_polygon (num_points,num_length):
+    al.down()
+    ang = (num_points-2)*180/num_points
+    for i in range(num_points):
+        al.forward(num_length)
+        al.left(180-ang)
+    al.up()
+
+def radius(num_points,num_length):
+    return(num_length/(2*math.sin(math.radians(180/num_points))))
+
+#al.goto(random.randrange(-300,301),random.randrange(-300,301))
+home_x=al.xcor()
+home_y=al.ycor()
+
+radi_incr=0
+for i in range(200):
+    al.clear()
+    radi=random.randrange(100,111) #controls radius
+    
+    if radi_incr<300:
+        radi_incr+=10
+    elif radi_incr >=300: #how to program this so it grows and shrinks, how to have multiple instances simultaneously
+        radi_incr=0
+    radi+=radi_incr
+   
+    for i in range (200): #number of shapes in circle
+        spread_radi=radi+random.randrange(-20,21) #controls spread
+        x_or_y=random.choice(['x','y']) #if I just used x, it wasn't filling the circle all the way
+        rand=random.choice([-1,1])
+        if x_or_y=='x':
+            rand_x=int(random.uniform(-1*spread_radi,spread_radi+1))
+            rand_y=math.sqrt((spread_radi**2)-(rand_x**2))*rand
+        else:
+            rand_y=int(random.uniform(-1*spread_radi,spread_radi+1))
+            rand_x=math.sqrt((spread_radi**2)-(rand_y**2))*rand
+        #vari_x=random.gauss(0,100)
+        #vari_y=random.gauss(0,100)
+        al.goto(rand_x,rand_y)
+        al.setheading(random.randrange(-180,181))
+        num_points=int(random.paretovariate(3))+2
+        num_length=int(random.paretovariate(3)*10)
+        if num_points <=6:
+            num_points=num_points
+        else:
+            num_points = 7 #this clamps the number of sides
+        if num_length <= 20: 
+            num_length = num_length
+        else:
+            num_length = 20 #this clamps the side length variable
+        draw_polygon(num_points,num_length)
+    turtle.update()
+    
