@@ -22,3 +22,8 @@ for i in range(2,10001):
     seq3np1(i)
 
 print (more_steps_than_100)
+'''
+collatz conjecture, 
+graphing on xy (for numbers whose steps exceed 100) definitely seems to show a pattern
+x = initial number
+y = number of steps needed to reach 1'''
