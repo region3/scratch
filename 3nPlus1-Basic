@@ -1,0 +1,24 @@
+def seq3np1(n):
+    """ Print the 3n+1 sequence from n, terminating when it reaches 1."""
+    orig_n=n
+    steps=1
+    #print(n)
+    while n != 1:
+        #print(n)
+        if n % 2 == 0:        # n is even
+            n = n // 2
+            steps+=1
+        else:                 # n is odd
+            n = n * 3 + 1
+            steps+=1
+    #print(n)                  # the last print is 1
+    #print ('steps = ',steps)
+    if steps>100:
+        more_steps_than_100[orig_n]=steps
+       
+more_steps_than_100 = {}        
+
+for i in range(2,10001):
+    seq3np1(i)
+
+print (more_steps_than_100)
