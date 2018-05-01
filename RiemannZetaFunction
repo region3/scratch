@@ -1,0 +1,15 @@
+##Riemann zeta
+
+def riemann_zeta(n):
+    sum=0
+    for x in range(1,1001): #limiting, instead of to infinity, to only 1000
+        sum=sum+(1/x**n)
+    riemann_output[n]=sum
+    #print (sum)
+
+riemann_output={}
+  
+for i in range(1,101):
+    riemann_zeta(i)
+
+print(riemann_output)
